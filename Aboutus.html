@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us - ChicBoutique</title>
+  <title>About Me - ChicBoutique</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -15,9 +15,16 @@
     h1, h2, h3 {
       font-family: 'Playfair Display', serif;
     }
+    footer {
+      background-color: #0b132b;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: auto;
+    }
   </style>
 </head>
-<body class="antialiased">
+<body class="antialiased flex flex-col min-h-screen">
 
   <!-- Navbar -->
   <header class="bg-white shadow-md sticky top-0 z-50">
@@ -25,45 +32,60 @@
       <a href="index.html" class="text-3xl font-bold text-[#F13AB1]">ChicBoutique</a>
       <nav>
         <ul class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-lg font-medium items-center">
-          <li><a href="index.html" class="text-[#F13AB1]">Home</a></li>
-          <li><a href="aboutus.html" class="text-gray-700 hover:text-[#F13AB1]">About Us</a></li>
+          <li><a href="index.html" class="text-gray-700 hover:text-[#F13AB1]">Home</a></li>
+          <li><a href="Aboutus.html" class="text-[#F13AB1]">About Us</a></li>
           <li><a href="managesales.html" class="text-gray-700 hover:text-[#F13AB1]">Manage Sales</a></li>
           <li><a href="analytics.html" class="text-gray-700 hover:text-[#F13AB1]">Analytics</a></li>
           <li><a href="wishlist.html" class="text-gray-700 hover:text-[#F13AB1]">Wishlist</a></li>
-          <li><a href="cart.html" class="text-gray-700 hover:text-[#F13AB1]">Cart</a></li>
+          <li><a href="cart.html" class="text-gray-700 hover:text-[#F13AB1]">Cart (<span id="cart-count">0</span>)</a></li>
           <li><a href="signin.html" class="bg-[#F13AB1] hover:bg-[#E72744] text-white py-2 px-4 rounded-full">Sign In</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- About Us Content -->
-  <section class="container mx-auto px-4 py-12 max-w-3xl">
-    <h2 class="text-4xl font-bold text-center text-[#F13AB1] mb-8">About Us</h2>
-    <div class="bg-white shadow-md rounded-lg p-8">
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-12 flex-1">
+    <h2 class="text-4xl font-bold text-center text-[#F13AB1] mb-8">About Me</h2>
+
+    <!-- Profile Image -->
+    <div class="flex justify-center mb-6">
+      <img src="images/maha.jpg" alt="Maha Lakshmi Nekkanti" class="w-40 h-40 rounded-full object-cover shadow-md">
+    </div>
+
+    <!-- About Me Text with Subtle Pink Background -->
+    <div class="max-w-3xl mx-auto bg-pink-100 shadow-md rounded-lg p-6 text-lg text-gray-800">
       <p class="mb-4">
-        Hello! I’m Maha, the designer behind ChicBoutique. I’m currently studying <span class="font-semibold">ISM 6225 – Distributed Information Systems</span> at the University of South Florida. As part of this course, I created this website to showcase my skills in <span class="font-semibold">HTML, CSS, JavaScript, and Tailwind CSS</span>.
+        Hi! I’m Maha Lakshmi Nekkanti, currently pursuing my master’s degree in Artificial Intelligence and Business Analytics at the University of South Florida. I’m enrolled in ISM 6225: App Development for Analytics, where I had the opportunity to develop this interactive website.
       </p>
       <p class="mb-4">
-        Through this project, I learned how to implement <span class="font-semibold">CRUD functionality</span> using localStorage, and how to organize data effectively on different pages. I also explored integrating <span class="font-semibold">Chart.js</span> to build an interactive analytics page that displays sales trends.
+        Through this project, I gained valuable hands-on experience with HTML, CSS, and JavaScript, learning how to build engaging web interfaces and enhance user interactivity. I focused on crafting a consistent and user-friendly design while integrating essential web technologies.
       </p>
       <p class="mb-4">
-        This project helped me understand the importance of <span class="font-semibold">responsive design</span> and <span class="font-semibold">user experience</span>, and I enjoyed building a site that looks great on both desktop and mobile devices. Tailwind CSS made it easier to maintain a consistent style across all pages.
+        Throughout the development process, I learned how to implement CRUD functionality using localStorage, enabling users to add, view, edit, and delete products seamlessly. I also organized data effectively across different pages to ensure a smooth and cohesive user experience. Additionally, I explored integrating Chart.js to build an interactive analytics page that displays product sales trends in an intuitive and visually appealing way.
       </p>
       <p class="mb-4">
-        You can view the complete project source code on my <a href="https://github.com/yourusername/ChicBoutique" target="_blank" class="text-[#F13AB1] hover:underline">GitHub Repository</a>.
+        This project not only enhanced my technical skills but also deepened my appreciation for the importance of responsive design and user experience. I’m proud of the consistent styling and accessibility of the website, which ensures a positive user journey across devices.
       </p>
       <p>
-        Thank you for visiting ChicBoutique—I hope you enjoy exploring it as much as I enjoyed building it!
+        You can find the complete source code for this website on my <a href="https://github.com/mahanekkanti13/Fashion_boutique" target="_blank" class="text-[#F13AB1] font-semibold hover:underline">GitHub Repository</a>.
       </p>
     </div>
-  </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-6 text-center">
-    &copy; 2025 ChicBoutique. All rights reserved.
+  <footer>
+    © 2025 ChicBoutique. All rights reserved.
   </footer>
+
+  <script>
+    document.getElementById('cart-count').textContent = (JSON.parse(localStorage.getItem('cart')) || []).length;
+  </script>
 </body>
 </html>
+
+
+
+
 
 
