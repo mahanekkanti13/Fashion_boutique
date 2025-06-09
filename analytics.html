@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Analytics - ChicBoutique</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #F9F9F9;
+      color: #29303E;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+    footer {
+      background-color: #0b132b;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
+      <a href="index.html" class="text-3xl font-bold text-[#F13AB1]">ChicBoutique</a>
+      <nav>
+        <ul class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-lg font-medium items-center">
+          <li><a href="index.html" class="text-gray-700 hover:text-[#F13AB1]">Home</a></li>
+          <li><a href="aboutus.html" class="text-gray-700 hover:text-[#F13AB1]">About Us</a></li>
+          <li><a href="managesales.html" class="text-gray-700 hover:text-[#F13AB1]">Manage Sales</a></li>
+          <li><a href="analytics.html" class="text-[#F13AB1]">Analytics</a></li>
+          <li><a href="wishlist.html" class="text-gray-700 hover:text-[#F13AB1]">Wishlist</a></li>
+          <li><a href="cart.html" class="text-gray-700 hover:text-[#F13AB1]">Cart (<span id="cart-count">0</span>)</a></li>
+          <li><a href="signin.html" class="bg-[#F13AB1] hover:bg-[#E72744] text-white py-2 px-4 rounded-full">Sign In</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-12 flex-1">
+    <h2 class="text-4xl font-bold text-center text-[#F13AB1] mb-8">Product Analytics</h2>
+    <div class="max-w-2xl mx-auto mb-6">
+      <label for="productSelect" class="block text-lg font-semibold mb-2">Select a Product:</label>
+      <select id="productSelect" class="w-full border-gray-300 rounded-lg p-2">
+        <option value="Floral Midi Dress">Floral Midi Dress</option>
+        <option value="Embroidered Kurta">Embroidered Kurta</option>
+        <option value="Classic Denim Jacket">Classic Denim Jacket</option>
+      </select>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+    <div class="max-w-3xl mx-auto mt-4 text-center text-gray-700">
+      <p>These charts show a simulated breakdown of product sales by region for the selected product.
+      The bar chart shows actual sales counts, while the pie chart shows proportions of total sales.
+      For demonstration purposes, the data is static. In a real implementation, this could be pulled from your database.</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 ChicBoutique. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('cart-count').textContent = (JSON.parse(localStorage.getItem('cart')) || []).length;
+
+    const productData = {
+      'Floral Midi Dress': { 'North': 50, 'South': 30, 'East': 40, 'West': 20 },
+      'Embroidered Kurta': { 'North': 20, 'South': 25, 'East': 30, 'West': 15 },
+      'Classic Denim Jacket': { 'North': 10, 'South': 5, 'East': 8, 'West': 12 }
+    };
+
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+
+    let barChart = new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(productData['Floral Midi Dress']),
+        datasets: [{
+          label: 'Sales by Region',
+          data: Object.values(productData['Floral Midi Dress']),
+          backgroundColor: ['#F13AB1', '#E72744', '#A15AC7', '#FF8C42'],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+            labels: { font: { size: 14 } }
+          },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { font: { size: 12 }, stepSize: 5 }
+          },
+          x: {
+            ticks: { font: { size: 12 } }
+          }
+        }
+      }
+    });
+
+    let pieChart = new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: Object.keys(productData['Floral Midi Dress']),
+        datasets: [{
+          label: 'Sales by Region',
+          data: Object.values(productData['Floral Midi Dress']),
+          backgroundColor: ['#F13AB1', '#E72744', '#A15AC7', '#FF8C42']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: { font: { size: 14 } }
+          },
+          tooltip: { enabled: true }
+        }
+      }
+    });
+
+    document.getElementById('productSelect').addEventListener('change', function() {
+      const selectedProduct = this.value;
+      const selectedData = productData[selectedProduct];
+      const labels = Object.keys(selectedData);
+      const values = Object.values(selectedData);
+
+      // Update Bar Chart
+      barChart.data.labels = labels;
+      barChart.data.datasets[0].data = values;
+      barChart.update();
+
+      // Update Pie Chart
+      pieChart.data.labels = labels;
+      pieChart.data.datasets[0].data = values;
+      pieChart.update();
+    });
+  </script>
+</body>
+</html>
+
+
+
+

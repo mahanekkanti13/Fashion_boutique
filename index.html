@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChicBoutique</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #F9F9F9;
+      color: #29303E;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
+      <a href="index.html" class="text-3xl font-bold text-[#F13AB1]">ChicBoutique</a>
+      <nav>
+        <ul class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-lg font-medium items-center">
+          <li><a href="index.html" class="text-[#F13AB1]">Home</a></li>
+          <li><a href="aboutus.html" class="text-gray-700 hover:text-[#F13AB1]">About Us</a></li>
+          <li><a href="managesales.html" class="text-gray-700 hover:text-[#F13AB1]">Manage Sales</a></li>
+          <li><a href="analytics.html" class="text-gray-700 hover:text-[#F13AB1]">Analytics</a></li>
+          <li><a href="wishlist.html" class="text-gray-700 hover:text-[#F13AB1]">Wishlist</a></li>
+          <li><a href="cart.html" class="text-gray-700 hover:text-[#F13AB1]">Cart (<span id="cart-count">0</span>)</a></li>
+          <li><a href="signin.html" class="bg-[#F13AB1] hover:bg-[#E72744] text-white py-2 px-4 rounded-full">Sign In</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-pink-400 via-pink-300 to-orange-300 py-20 text-center">
+    <h1 class="text-5xl font-bold text-white mb-4">Welcome to ChicBoutique</h1>
+    <p class="text-lg text-white">Your one-stop destination for stylish outfits and custom designs for women and girls. Explore our curated collections and embrace your style!</p>
+  </section>
+
+  <!-- Featured Products Section -->
+  <section id="featured-products" class="py-12">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center text-[#F13AB1] mb-8">Featured Products</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Floral Midi Dress -->
+        <div class="bg-white shadow-md rounded-lg p-6 text-center">
+          <img src="images/floral midi dress floral.webp" alt="Floral Midi Dress" class="w-full h-48 object-cover rounded mb-4">
+          <h3 class="text-xl font-semibold mb-2">Floral Midi Dress</h3>
+          <button onclick="window.location.href='floral-midi-dress.html'" class="bg-[#F13AB1] text-white py-2 px-4 rounded-full">View Products</button>
+        </div>
+
+        <!-- Embroidered Kurta -->
+        <div class="bg-white shadow-md rounded-lg p-6 text-center">
+          <img src="images/embroidered kurta lavendar.jpeg" alt="Embroidered Kurta" class="w-full h-48 object-cover rounded mb-4">
+          <h3 class="text-xl font-semibold mb-2">Embroidered Kurta</h3>
+          <button onclick="window.location.href='embroidered-kurta.html'" class="bg-[#F13AB1] text-white py-2 px-4 rounded-full">View Products</button>
+        </div>
+
+        <!-- Classic Denim Jacket -->
+        <div class="bg-white shadow-md rounded-lg p-6 text-center">
+          <img src="images/classic denim jacket style2.png" alt="Classic Denim Jacket" class="w-full h-48 object-cover rounded mb-4">
+          <h3 class="text-xl font-semibold mb-2">Classic Denim Jacket</h3>
+          <button onclick="window.location.href='classic-denim-jacket.html'" class="bg-[#F13AB1] text-white py-2 px-4 rounded-full">View Products</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-6 text-center">
+    &copy; 2025 ChicBoutique. All rights reserved.
+  </footer>
+
+  <script>
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+    updateCartCount();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

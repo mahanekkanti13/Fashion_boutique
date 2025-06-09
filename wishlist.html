@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Wishlist - ChicBoutique</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #F9F9F9;
+      color: #29303E;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
+      <a href="index.html" class="text-3xl font-bold text-[#F13AB1]">ChicBoutique</a>
+      <nav>
+        <ul class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-lg font-medium items-center">
+          <li><a href="index.html" class="text-[#F13AB1]">Home</a></li>
+          <li><a href="aboutus.html" class="text-gray-700 hover:text-[#F13AB1]">About Us</a></li>
+          <li><a href="managesales.html" class="text-gray-700 hover:text-[#F13AB1]">Manage Sales</a></li>
+          <li><a href="analytics.html" class="text-gray-700 hover:text-[#F13AB1]">Analytics</a></li>
+          <li><a href="wishlist.html" class="text-gray-700 hover:text-[#F13AB1]">Wishlist</a></li>
+          <li><a href="cart.html" class="text-gray-700 hover:text-[#F13AB1]">Cart (<span id="cart-count">0</span>)</a></li>
+          <li><a href="signin.html" class="bg-[#F13AB1] hover:bg-[#E72744] text-white py-2 px-4 rounded-full">Sign In</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Wishlist Content -->
+  <main class="flex-grow">
+    <section class="container mx-auto px-4 py-12">
+      <h2 class="text-4xl font-bold text-center text-[#F13AB1] mb-8">Your Wishlist</h2>
+      <div id="wishlistItems" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <p id="emptyMessage" class="text-center text-gray-600">Your wishlist is empty.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-6 text-center">
+    &copy; 2025 ChicBoutique. All rights reserved.
+  </footer>
+
+  <!-- Wishlist Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      displayWishlist();
+    });
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    function displayWishlist() {
+      const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      const wishlistContainer = document.getElementById('wishlistItems');
+      const emptyMessage = document.getElementById('emptyMessage');
+      wishlistContainer.innerHTML = '';
+
+      if (wishlist.length === 0) {
+        emptyMessage.style.display = 'block';
+      } else {
+        emptyMessage.style.display = 'none';
+        wishlist.forEach((product, index) => {
+          const card = document.createElement('div');
+          card.className = 'bg-white shadow-md rounded-lg p-4';
+          card.innerHTML = `
+            <h3 class="font-bold text-lg mb-2">${product.name}</h3>
+            <p><strong>Price:</strong> $${product.price}</p>
+            <p>${product.description}</p>
+            <div class="flex space-x-2 mt-4">
+              <button onclick="removeFromWishlist(${index})" class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded">Remove</button>
+              <button onclick="addToCart(${index})" class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded">Add to Cart</button>
+            </div>
+          `;
+          wishlistContainer.appendChild(card);
+        });
+      }
+    }
+
+    function removeFromWishlist(index) {
+      let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      wishlist.splice(index, 1);
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      displayWishlist();
+    }
+
+    function addToCart(index) {
+      let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const product = wishlist[index];
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      alert(`${product.name} added to cart!`);
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+

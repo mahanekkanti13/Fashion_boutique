@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Classic Denim Jacket - ChicBoutique</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Lato', sans-serif; background-color: #F9F9F9; color: #29303E; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
+      <a href="index.html" class="text-3xl font-bold text-[#F13AB1]">ChicBoutique</a>
+      <nav>
+        <ul class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 text-lg font-medium items-center">
+          <li><a href="index.html" class="text-[#F13AB1]">Home</a></li>
+          <li><a href="aboutus.html" class="text-gray-700 hover:text-[#F13AB1]">About Us</a></li>
+          <li><a href="managesales.html" class="text-gray-700 hover:text-[#F13AB1]">Manage Sales</a></li>
+          <li><a href="analytics.html" class="text-gray-700 hover:text-[#F13AB1]">Analytics</a></li>
+          <li><a href="wishlist.html" class="text-gray-700 hover:text-[#F13AB1]">Wishlist</a></li>
+          <li><a href="cart.html" class="text-gray-700 hover:text-[#F13AB1]">Cart (<span id="cart-count">0</span>)</a></li>
+          <li><a href="signin.html" class="bg-[#F13AB1] hover:bg-[#E72744] text-white py-2 px-4 rounded-full">Sign In</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Products -->
+  <section class="container mx-auto px-4 py-8">
+    <h2 class="text-4xl font-bold text-center text-[#F13AB1] mb-8">Classic Denim Jackets</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Jacket 1 -->
+      <div class="bg-white shadow-md rounded-lg p-4 text-center">
+        <img src="images/classic denim jacket style1.png" alt="Denim Jacket Style 1" class="w-full h-48 object-cover rounded mb-4">
+        <h3 class="text-xl font-semibold mb-2">Classic Denim Jacket Style 1</h3>
+        <p class="mb-2">A classic denim jacket perfect for everyday wear.</p>
+        <p class="font-bold mb-2">$90</p>
+        <div class="flex space-x-2 justify-center">
+          <button onclick="addToWishlist('Classic Denim Jacket Style 1', 90, 'A classic denim jacket perfect for everyday wear.', 'images/classic denim jacket style1.png')" class="bg-pink-500 text-white py-2 px-4 rounded-full">Add to Wishlist</button>
+          <button onclick="addToCart('Classic Denim Jacket Style 1', 90, 'A classic denim jacket perfect for everyday wear.', 'images/classic denim jacket style1.png')" class="bg-green-500 text-white py-2 px-4 rounded-full">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Jacket 2 -->
+      <div class="bg-white shadow-md rounded-lg p-4 text-center">
+        <img src="images/classic denim jacket style2.png" alt="Denim Jacket Style 2" class="w-full h-48 object-cover rounded mb-4">
+        <h3 class="text-xl font-semibold mb-2">Classic Denim Jacket Style 2</h3>
+        <p class="mb-2">A stylish denim jacket with a modern twist.</p>
+        <p class="font-bold mb-2">$95</p>
+        <div class="flex space-x-2 justify-center">
+          <button onclick="addToWishlist('Classic Denim Jacket Style 2', 95, 'A stylish denim jacket with a modern twist.', 'images/classic denim jacket style2.png')" class="bg-pink-500 text-white py-2 px-4 rounded-full">Add to Wishlist</button>
+          <button onclick="addToCart('Classic Denim Jacket Style 2', 95, 'A stylish denim jacket with a modern twist.', 'images/classic denim jacket style2.png')" class="bg-green-500 text-white py-2 px-4 rounded-full">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Jacket 3 -->
+      <div class="bg-white shadow-md rounded-lg p-4 text-center">
+        <img src="images/classic denim jacket style3.webp" alt="Denim Jacket Style 3" class="w-full h-48 object-cover rounded mb-4">
+        <h3 class="text-xl font-semibold mb-2">Classic Denim Jacket Style 3</h3>
+        <p class="mb-2">A trendy denim jacket with floral embroidery.</p>
+        <p class="font-bold mb-2">$100</p>
+        <div class="flex space-x-2 justify-center">
+          <button onclick="addToWishlist('Classic Denim Jacket Style 3', 100, 'A trendy denim jacket with floral embroidery.', 'images/classic denim jacket style3.webp')" class="bg-pink-500 text-white py-2 px-4 rounded-full">Add to Wishlist</button>
+          <button onclick="addToCart('Classic Denim Jacket Style 3', 100, 'A trendy denim jacket with floral embroidery.', 'images/classic denim jacket style3.webp')" class="bg-green-500 text-white py-2 px-4 rounded-full">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-6 text-center">
+    &copy; 2025 ChicBoutique. All rights reserved.
+  </footer>
+
+  <script>
+    function addToWishlist(name, price, description, image) {
+      let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      wishlist.push({ name, price, description, image });
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      alert(`${name} has been added to your wishlist!`);
+    }
+
+    function addToCart(name, price, description, image) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ name, price, description, image });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${name} has been added to your cart!`);
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+    updateCartCount();
+  </script>
+</body>
+</html>
+
+
+
